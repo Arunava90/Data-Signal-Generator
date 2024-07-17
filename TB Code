@@ -1,0 +1,20 @@
+module data_signal_generator_tb();
+
+reg in_clk, in_rst;
+wire out_data;
+
+data_signal_generator u1 (in_clk, in_rst, out_data);
+
+initial begin
+
+in_rst = 1'b0;
+in_clk = 1'b0;
+#45 in_rst = 1'b1;
+#200 in_rst = 1'b0;
+#50 $finish;
+
+end
+
+always #5in_clk = ~in_clk;
+
+endmodule
