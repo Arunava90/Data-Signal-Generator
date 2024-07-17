@@ -1,0 +1,26 @@
+module data_signal_generator(
+    input in_clk, in_rst,
+    output out_data
+    );
+    
+    reg r_q1, r_q2;
+    
+    always@ (posedge in_clk or negedge in_rst)
+    begin
+        if(~in_rst)
+            r_q1 <= 1'b0;
+        else
+            r_q1 <= ~r_q1;
+    end
+    
+    always@ (negedge in_clk or negedge in_rst)
+    begin
+        if(~in_rst)
+            r_q2 <= 1'b0;
+        else
+            r_q2 <= r_q1;
+    end 
+    
+    assign out_data = r_q1^r_q2;   
+    
+endmodule
